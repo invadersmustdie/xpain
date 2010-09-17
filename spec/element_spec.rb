@@ -1,0 +1,39 @@
+require "lib/xpain"
+
+describe "element node" do
+  def build_single_element_node
+    XPain::Builder.new do |xsd|
+      xsd.schema do
+        xsd.element "street", :type => "string"
+      end
+    end
+  end
+
+  it "should create a single element node" do
+    schema = build_single_element_node
+
+    schema.doc.xpath("//xs:element").size.should == 1
+  end
+
+  it "should have a xsd namespace" do
+    schema = build_single_element_node
+    element = schema.doc.xpath("//xs:element").first
+
+    element.namespace.prefix.should == "xs"
+    element.namespace.href.should == "http://www.w3.org/2001/XMLSchema"
+  end
+
+  it "should have name i've set" do
+    schema = build_single_element_node
+    element = schema.doc.xpath("//xs:element").first
+
+    element['name'].should == "street"
+  end
+
+  it "should have type i've set" do
+    schema = build_single_element_node
+    element = schema.doc.xpath("//xs:element").first
+
+    element['type'].should == "string"
+  end
+end

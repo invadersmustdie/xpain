@@ -1,0 +1,85 @@
+Abstract
+========
+
+DSL for creating simple xsd files (not xsd-feature complete)
+
+Yeah for sure I could just learn writing xsd without copy'n'paste, but why not learning it by implementing a dsl for
+creating it :)
+
+Example
+=======
+
+schema = XPain::Builder.new do |xsd|
+  xsd.schema do
+
+    xsd.define_complex_type "mystring" do
+      xsd.extension :base => "string" do
+        xsd.attribute :name => "type", :type => "string", :use => "optional"
+      end
+    end
+
+    xsd.define_complex_type "myint", :type => "all" do
+      xsd.extension :base => "integer" do
+        xsd.attribute :name => "type", :type => "string", :use => "optional"
+      end
+    end
+
+    xsd.define_complex_type "t_address", :type => "all" do
+      xsd.element "street", :type => "string"
+      xsd.element "city", :type => "string"
+    end
+
+    xsd.element "customer" do
+      xsd.element "customer_number", :type => "mystring"
+      xsd.elements ["firstname", "lastname"], :type => "string", :minOccurs => 1
+
+      xsd.element "addresses", :ctype => "sequence" do
+        xsd.element "address", :type => "t_address"
+      end
+    end
+  end
+end
+
+puts schema.to_xml
+
+=> output
+
+<?xml version="1.0"?>
+<schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="mystring">
+    <xs:simpleContent>
+      <xs:extension base="string">
+        <xs:attribute type="string" use="optional" name="type"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="myint">
+    <xs:all>
+      <xs:extension base="integer">
+        <xs:attribute type="string" use="optional" name="type"/>
+      </xs:extension>
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="t_address">
+    <xs:all>
+      <xs:element type="string" name="street"/>
+      <xs:element type="string" name="city"/>
+    </xs:all>
+  </xs:complexType>
+  <xs:element name="customer">
+    <xs:complexType>
+      <xs:all>
+        <xs:element type="mystring" name="customer_number"/>
+        <xs:element type="string" minOccurs="1" name="firstname"/>
+        <xs:element type="string" minOccurs="1" name="lastname"/>
+        <xs:element name="addresses">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="t_address" name="address"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
+</schema>
