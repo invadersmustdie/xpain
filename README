@@ -45,41 +45,41 @@ puts schema.to_xml
 => output
 
 <?xml version="1.0"?>
-<schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="mystring">
-    <xs:simpleContent>
-      <xs:extension base="string">
-        <xs:attribute type="string" use="optional" name="type"/>
-      </xs:extension>
-    </xs:simpleContent>
-  </xs:complexType>
-  <xs:complexType name="myint">
-    <xs:all>
-      <xs:extension base="integer">
-        <xs:attribute type="string" use="optional" name="type"/>
-      </xs:extension>
-    </xs:all>
-  </xs:complexType>
-  <xs:complexType name="t_address">
-    <xs:all>
-      <xs:element type="string" name="street"/>
-      <xs:element type="string" name="city"/>
-    </xs:all>
-  </xs:complexType>
-  <xs:element name="customer">
-    <xs:complexType>
-      <xs:all>
-        <xs:element type="mystring" name="customer_number"/>
-        <xs:element type="string" minOccurs="1" name="firstname"/>
-        <xs:element type="string" minOccurs="1" name="lastname"/>
-        <xs:element name="addresses">
-          <xs:complexType>
-            <xs:sequence>
-              <xs:element type="t_address" name="address"/>
-            </xs:sequence>
-          </xs:complexType>
-        </xs:element>
-      </xs:all>
-    </xs:complexType>
-  </xs:element>
-</schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:complexType name="mystring">
+    <xsd:simpleContent>
+      <xsd:extension base="string">
+        <xsd:attribute type="string" use="optional" name="type"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="myint">
+    <xsd:all>
+      <xsd:extension base="integer">
+        <xsd:attribute type="string" use="optional" name="type"/>
+      </xsd:extension>
+    </xsd:all>
+  </xsd:complexType>
+  <xsd:complexType name="t_address">
+    <xsd:all>
+      <xsd:element type="string" name="street"/>
+      <xsd:element type="string" name="city"/>
+    </xsd:all>
+  </xsd:complexType>
+  <xsd:element name="customer">
+    <xsd:complexType>
+      <xsd:all>
+        <xsd:element type="mystring" name="customer_number"/>
+        <xsd:element type="string" minOccurs="1" name="firstname"/>
+        <xsd:element type="string" minOccurs="1" name="lastname"/>
+        <xsd:element name="addresses">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element type="t_address" name="address"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:all>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
