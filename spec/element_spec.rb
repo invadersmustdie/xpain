@@ -1,4 +1,4 @@
-require "lib/xpain"
+require "spec_helper"
 
 describe "element node" do
   def build_single_element_node

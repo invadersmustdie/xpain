@@ -1,4 +1,4 @@
-require "lib/xpain"
+require "spec_helper"
 
 describe "complex type definition node" do
   def build_single_complex_type_node
@@ -28,7 +28,6 @@ describe "complex type definition node" do
   it "should contain an extension" do
     schema = build_single_complex_type_node
 
-    puts schema.to_xml
     schema.doc.xpath("//xsd:complexType[1]/xsd:simpleContent/xsd:extension[@base='string']").size.should == 1
   end
 
