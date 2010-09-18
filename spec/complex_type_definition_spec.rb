@@ -16,24 +16,25 @@ describe "complex type definition node" do
   it "should create a single complex type node" do
     schema = build_single_complex_type_node
 
-    schema.doc.xpath("//xs:complexType").size.should == 1
+    schema.doc.xpath("//xsd:complexType").size.should == 1
   end
 
   it "should contain simpleContent by default" do
     schema = build_single_complex_type_node
 
-    schema.doc.xpath("//xs:complexType[1]/xs:simpleContent").size.should == 1
+    schema.doc.xpath("//xsd:complexType[1]/xsd:simpleContent").size.should == 1
   end
 
   it "should contain an extension" do
     schema = build_single_complex_type_node
 
-    schema.doc.xpath("//xs:complexType[1]/xs:simpleContent/xs:extension[@base='string']").size.should == 1
+    puts schema.to_xml
+    schema.doc.xpath("//xsd:complexType[1]/xsd:simpleContent/xsd:extension[@base='string']").size.should == 1
   end
 
   it "should overwrite an attribute" do
     schema = build_single_complex_type_node
 
-    schema.doc.xpath("//xs:complexType[1]/xs:simpleContent/xs:extension[@base='string']/xs:attribute[@type='string' and @name='type' and @use='optional']").size.should == 1
+    schema.doc.xpath("//xsd:complexType[1]/xsd:simpleContent/xsd:extension[@base='string']/xsd:attribute[@type='string' and @name='type' and @use='optional']").size.should == 1
   end
 end

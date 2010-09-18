@@ -6,7 +6,7 @@ module XPain
 
   class Builder < Nokogiri::XML::Builder
     def schema(opts = {}, &block)
-      create_custom_node("schema", {"xmlns:xs" => "http://www.w3.org/2001/XMLSchema"}, &block)
+      create_custom_node("xsd:schema", {"xmlns:xsd" => "http://www.w3.org/2001/XMLSchema"}, &block)
     end
 
     def define_complex_type(name, opts = {}, &block)

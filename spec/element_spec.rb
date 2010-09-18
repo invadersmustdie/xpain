@@ -12,27 +12,27 @@ describe "element node" do
   it "should create a single element node" do
     schema = build_single_element_node
 
-    schema.doc.xpath("//xs:element").size.should == 1
+    schema.doc.xpath("//xsd:element").size.should == 1
   end
 
   it "should have a xsd namespace" do
     schema = build_single_element_node
-    element = schema.doc.xpath("//xs:element").first
+    element = schema.doc.xpath("//xsd:element").first
 
-    element.namespace.prefix.should == "xs"
+    element.namespace.prefix.should == "xsd"
     element.namespace.href.should == "http://www.w3.org/2001/XMLSchema"
   end
 
   it "should have name i've set" do
     schema = build_single_element_node
-    element = schema.doc.xpath("//xs:element").first
+    element = schema.doc.xpath("//xsd:element").first
 
     element['name'].should == "street"
   end
 
   it "should have type i've set" do
     schema = build_single_element_node
-    element = schema.doc.xpath("//xs:element").first
+    element = schema.doc.xpath("//xsd:element").first
 
     element['type'].should == "string"
   end
