@@ -3,7 +3,9 @@ module XPain
 
   require "nokogiri"
 
+  require "xpain/custom_nodes"
+  require "xpain/options_enhancer"
+
   require "xpain/document"
   require "xpain/builder"
-  require "xpain/options_enhancer"
 end
