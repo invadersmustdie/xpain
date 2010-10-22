@@ -36,4 +36,16 @@ describe "complex type definition node" do
 
     schema.doc.xpath("//xsd:complexType[1]/xsd:simpleContent/xsd:extension[@base='string']/xsd:attribute[@type='string' and @name='type' and @use='optional']").size.should == 1
   end
+
+  it "should be possible to overwrite simpleContent default" do
+    schema = XPain::Builder.new do |xsd|
+      xsd.schema do
+        xsd.define_complex_type "mystring", :contains => "all" do
+          xsd.element "foobar", :type => "string"
+        end
+      end
+    end
+
+    schema.doc.xpath("//xsd:complexType[1]/xsd:all").size.should == 1
+  end
 end

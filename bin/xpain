@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+$:.unshift("lib")
+require "xpain"
+
+if ARGV[0]
+  puts eval(File.read(ARGV[0])).to_xml
+else
+  puts "usage: xpain <xpainfile>"
+  exit 1
+end
