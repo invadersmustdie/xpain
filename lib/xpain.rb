@@ -35,6 +35,16 @@ module XPain
       end
     end
 
+    def attribute(name, opts = {})
+      if name.is_a?(String)
+        opts.merge!({:name => name})
+      else
+        opts.merge!(name)
+      end
+
+      create_custom_node("attribute", opts)
+    end
+
     def elements(list, opts = {})
       list.each do |li|
         element(li, opts)
