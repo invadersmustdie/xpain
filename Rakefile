@@ -17,6 +17,7 @@ spec = Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.autorequire = 'rake'
   s.files = FileList["{lib,spec,Rakefile}/**/*"]
+  s.executables = ['xpain']
   s.description = <<EOF
   ruby dsl for creating xsd's
 EOF
