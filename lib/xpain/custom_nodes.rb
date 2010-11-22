@@ -22,7 +22,9 @@ module XPain
       collection_type = opts.delete(:contains) || "all"
 
       if block_given?
-        create_custom_node("element", :name => name) do
+        if collection_type == 'none'
+          create_custom_node("element", opts.merge!({:name => name}), &block)
+        else
           define_inline_complex_type(collection_type, &block)
         end
       else
@@ -43,6 +45,12 @@ module XPain
     def elements(list, opts = {})
       list.each do |li|
         element(li, opts)
+      end
+    end
+
+    def document(text)
+      create_custom_node('annotation') do |xsd|
+        xsd.documentation text
       end
     end
   end
