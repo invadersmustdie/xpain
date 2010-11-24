@@ -29,7 +29,9 @@ module XPain
         if collection_type == 'none'
           create_custom_node("element", opts.merge!({:name => name}), &block)
         else
-          define_inline_complex_type(collection_type, &block)
+          create_custom_node("element", opts.merge!({:name => name})) do
+            define_inline_complex_type(collection_type, &block)
+          end
         end
       else
         create_custom_node("element", opts.merge!({:name => name}))

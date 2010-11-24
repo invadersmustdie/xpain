@@ -1,0 +1,30 @@
+schema = XPain::Builder.new do |xsd|
+  xsd.schema do
+
+    xsd.define_complex_type "mystring" do
+      xsd.extension :base => "string" do
+        xsd.attribute :name => "type", :type => "string", :use => "optional"
+      end
+    end
+
+    xsd.define_complex_type "myint", :type => "all" do
+      xsd.extension :base => "integer" do
+        xsd.attribute :name => "type", :type => "string", :use => "optional"
+      end
+    end
+
+    xsd.define_complex_type "t_address", :type => "all" do
+      xsd.element "street", :type => "string"
+      xsd.element "city", :type => "string"
+    end
+
+    xsd.element "customer" do
+      xsd.element "customer_number", :type => "mystring"
+      xsd.elements ["firstname", "lastname"], :type => "string", :minOccurs => 1
+
+      xsd.element "addresses", :ctype => "sequence" do
+        xsd.element "address", :type => "t_address"
+      end
+    end
+  end
+end
