@@ -4,6 +4,10 @@ module XPain
       create_custom_node("xsd:schema", {"xmlns:xsd" => "http://www.w3.org/2001/XMLSchema"}, &block)
     end
 
+    def include(name)
+      create_custom_node("include", {"schemaLocation" => name})
+    end
+
     def define_complex_type(name, opts = {}, &block)
       node_type = opts.delete(:contains) || "simpleContent"
 
@@ -25,7 +29,9 @@ module XPain
         if collection_type == 'none'
           create_custom_node("element", opts.merge!({:name => name}), &block)
         else
-          define_inline_complex_type(collection_type, &block)
+          create_custom_node("element", opts.merge!({:name => name})) do
+            define_inline_complex_type(collection_type, &block)
+          end
         end
       else
         create_custom_node("element", opts.merge!({:name => name}))

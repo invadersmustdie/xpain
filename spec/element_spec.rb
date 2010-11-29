@@ -36,4 +36,18 @@ describe "element node" do
 
     element['type'].should == "string"
   end
+
+  it "should have elements with complex type" do
+    schema = XPain::Builder.new do |xsd|
+      xsd.schema do
+        xsd.element "customer" do
+          xsd.element "customer_number", :type => "mystring"
+        end
+      end
+    end
+
+    element = schema.doc.xpath("//xsd:element/xsd:complexType/xsd:all/xsd:element").first
+
+    element['name'].should == 'customer_number'
+  end
 end
